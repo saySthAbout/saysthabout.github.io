@@ -1,3 +1,384 @@
-git add index.html
-git commit -m "Add Living Abroad project card"
-git push
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>곽진아 | Portfolio</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --tag-bg: #1f2937;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 24px 60px;
+    }
+    .hero-label {
+      font-size: 13px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 32px;
+    }
+    .hero-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity .15s;
+    }
+    .hero-links a:hover { opacity: .8; }
+    .btn-primary { background: var(--accent); color: #0d1117; }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); }
+
+    /* ── SECTION ── */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .section-title {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── PROJECT CARDS ── */
+    .cards { display: grid; gap: 20px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+    .card-title { font-size: 1.1rem; font-weight: 600; }
+    .card-title a { color: var(--accent); text-decoration: none; }
+    .card-title a:hover { text-decoration: underline; }
+    .badge {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .badge-team { background: #1f3a5f; color: #79c0ff; }
+    .badge-solo { background: #1a3a2a; color: #56d364; }
+    .card-desc { color: var(--muted); font-size: 0.92rem; margin-bottom: 18px; }
+    .card-desc strong { color: var(--text); }
+
+    .features { list-style: none; margin-bottom: 20px; display: grid; gap: 6px; }
+    .features li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+    }
+    .features li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--muted);
+    }
+
+    .card-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .card-link {
+      font-size: 13px;
+      padding: 5px 14px;
+      border-radius: 5px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: border-color .15s, color .15s;
+    }
+    .card-link:hover { border-color: var(--accent); color: var(--accent); }
+    .card-link.live { border-color: var(--accent2); color: var(--accent2); }
+    .card-link.live:hover { background: #1a3a2a; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+    .skill-group h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 12px; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill { font-size: 12px; padding: 3px 9px; background: var(--tag-bg); border-radius: 4px; color: var(--text); }
+
+    /* ── CONTACT ── */
+    .contact-row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .contact-item a { color: var(--accent); text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .card-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Portfolio</p>
+  <h1>안녕하세요,<br><span>곽진아</span>입니다.</h1>
+  <p>데이터 분석과 AI 서비스 개발에 관심 있는 개발자입니다.<br>
+     실제 데이터로 문제를 해결하고, 결과를 서비스로 만드는 과정을 좋아합니다.</p>
+  <div class="hero-links">
+    <a class="btn-primary" href="https://github.com/saySthAbout" target="_blank">
+      ⬡ GitHub
+    </a>
+    <a class="btn-outline" href="mailto:saysthabout@gmail.com">
+      ✉ saysthabout@gmail.com
+    </a>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section>
+  <p class="section-title">Projects</p>
+  <div class="cards">
+
+    <!-- Living Abroad -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://github.com/saySthAbout/living-abroad" target="_blank">Living Abroad</a>
+        </div>
+        <span class="badge badge-solo">개인 프로젝트</span>
+      </div>
+      <p class="card-desc">
+        해외 취업·기술이민(캐나다·호주·영국) 준비자의 나이·학력·경력·영어 능력·선호 조건을 분석해
+        <strong>국가·비자 적합도와 준비 방향을 제시하는 AI 기반 웹 서비스</strong>.
+        공식 정책 문서 기반 RAG 상담까지 제공합니다.
+      </p>
+      <ul class="features">
+        <li>국가·비자별 규칙 테이블 기반 자격 판정 (충족/보완 필요/확인 필요 3단계)</li>
+        <li>K-Means 클러스터링으로 36개국 환경 점수 산출 (이민자 유입·고용률·생활비 등 9개 피처)</li>
+        <li>Sentence Transformer 임베딩 + pgvector 코사인 유사도로 경력·직업 매칭</li>
+        <li>정책 문서 청킹·임베딩 → pgvector 검색 → 자체 호스팅 LLM(Qwen3-8B-AWQ) RAG 상담</li>
+        <li>Docker Compose로 GCP Compute Engine 배포 · RunPod GPU에서 vLLM 자체 호스팅</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Vue 3</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">pgvector</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Sentence Transformers</span>
+        <span class="tag">vLLM</span>
+        <span class="tag">Docker</span>
+        <span class="tag">GCP</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link" href="https://github.com/saySthAbout/living-abroad" target="_blank">GitHub</a>
+        <a class="card-link live" href="https://34.132.107.128.sslip.io" target="_blank">Live Demo ↗</a>
+      </div>
+    </div>
+
+    <!-- TruthLens -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://github.com/rhantj/TruthLens" target="_blank">TruthLens</a>
+        </div>
+        <span class="badge badge-team">팀 프로젝트 · 7인</span>
+      </div>
+      <p class="card-desc">
+        생성형 AI 콘텐츠의 급속한 확산에 대응하는 <strong>AI 생성 여부 판별 웹 서비스</strong>.
+        딥페이크 영상·이미지, 가짜뉴스, AI 생성 논문을 탐지하고 신뢰 점수와 근거를 시각화합니다.
+      </p>
+      <ul class="features">
+        <li>영상 / 이미지 / 뉴스 / 논문 4가지 도메인 AI 생성 판별</li>
+        <li>프레임 단위 딥페이크 의심 구간 하이라이트 및 히트맵 제공</li>
+        <li>논문 자동 요약 · 누락 인용 탐지 · 수정본 PDF 다운로드</li>
+        <li>Redis 캐싱으로 동일 콘텐츠 1초 이내 재응답 (TTL 24h)</li>
+        <li>Celery 비동기 큐로 대용량 영상 처리 분리</li>
+        <li>담당: 메인 화면 · 마이페이지 · 분석 이력 조회 · 뉴스 분석 백엔드</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Flask</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Transformers</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">Redis</span>
+        <span class="tag">Celery</span>
+        <span class="tag">MariaDB</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Cloudtype</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link" href="https://github.com/rhantj/TruthLens" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Consumption Analytics -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://github.com/saySthAbout/consumption_analytics" target="_blank">경기도 소비 패턴 분석 &amp; 매출 예측</a>
+        </div>
+        <span class="badge badge-solo">개인 프로젝트</span>
+      </div>
+      <p class="card-desc">
+        경기도 18개 시·군 카드 소비 데이터 <strong>약 5,100만 행</strong>을 분석해
+        행정동·업종·시간대별 소비 패턴을 시각화하고 LightGBM으로 매출을 예측하는 Streamlit 대시보드.
+      </p>
+      <ul class="features">
+        <li>Kaggle GPU(T4×2)로 51M행 전체 학습 — R² 0.6859 달성</li>
+        <li>행정동 코드 매핑 파이프라인 구축 (372개 코드 전수 매핑)</li>
+        <li>업종 중분류별 평균 거래 건수 자동 세팅 예측 UI</li>
+        <li>매출 분포 · 시간대별 · 업종별 소비 트렌드 인터랙티브 차트</li>
+        <li>Streamlit Cloud 배포 · GitHub Actions 자동 배포</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">LightGBM</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">Plotly</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Kaggle</span>
+        <span class="tag">GitHub Actions</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link" href="https://github.com/saySthAbout/consumption_analytics" target="_blank">GitHub</a>
+        <a class="card-link live" href="https://consumption-analytics.streamlit.app/" target="_blank">Live Demo ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section>
+  <p class="section-title">Skills</p>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>Language</h3>
+      <div class="skill-list">
+        <span class="skill">Python</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">HTML/CSS</span>
+        <span class="skill">SQL</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Data / ML</h3>
+      <div class="skill-list">
+        <span class="skill">Pandas</span>
+        <span class="skill">NumPy</span>
+        <span class="skill">LightGBM</span>
+        <span class="skill">Scikit-learn</span>
+        <span class="skill">PyTorch</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Backend</h3>
+      <div class="skill-list">
+        <span class="skill">Flask</span>
+        <span class="skill">Celery</span>
+        <span class="skill">Redis</span>
+        <span class="skill">MariaDB</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>DevOps / Tools</h3>
+      <div class="skill-list">
+        <span class="skill">Git</span>
+        <span class="skill">GitHub Actions</span>
+        <span class="skill">Streamlit</span>
+        <span class="skill">Kaggle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <p class="section-title">Contact</p>
+  <div class="contact-row">
+    <div class="contact-item">
+      ✉ <a href="mailto:saysthabout@gmail.com">saysthabout@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      ⬡ <a href="https://github.com/saySthAbout" target="_blank">github.com/saySthAbout</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 곽진아 · Built with GitHub Pages
+</footer>
+
+</body>
+</html>
